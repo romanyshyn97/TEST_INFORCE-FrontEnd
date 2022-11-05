@@ -8,7 +8,7 @@ import {
 
 import AppHeader from "./Components/AppHeader/AppHeader";
 import ProductsList from "./Components/ProductsList/ProductsList";
-import NewProduct from "./Components/NewProduct/NewProduct";
+import ProductView from "./Components/ProductView/ProductView";
 import "./App.css";
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
       <main>
         <Routes>
           <Route path="/" element={<ProductsList  />}/>
-            
+          <Route path="/:name" element={<ProductView/>}/>
             
          
         </Routes>

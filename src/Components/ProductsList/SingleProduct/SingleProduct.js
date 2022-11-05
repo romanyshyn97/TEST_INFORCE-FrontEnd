@@ -3,6 +3,7 @@ import { useState } from "react";
 import Modal from "../../../shared/Modal";
 import { useHttpClient } from "../../../hooks/http-hook";
 import Button from "../../../shared/Button";
+import { Link } from "react-router-dom";
 
 const SingleProduct = (props) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -47,19 +48,24 @@ const SingleProduct = (props) => {
       >
         <p>Do yo want to delete this place?</p>
       </Modal>
+        
       <div className="product-list_single-item">
+      <Button to={`/${props.name}`}>
         <img
-          src="https://healthjade.com/wp-content/uploads/2017/10/apple-fruit.jpg"
+          src={props.imageUrl}
           alt="apple"
-        />
+        /> </Button>
         <h2>{props.name}</h2>
         <p>count: 1</p>
         <h3>weight: 100g</h3>
         <h3>{props.description}</h3>
+       
         <span className="delete" onClick={showDeleteModalHandler}>
           <img src={trash} alt="delete" />
         </span>
       </div>
+      
+      
     </>
   );
 };

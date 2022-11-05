@@ -23,6 +23,10 @@ const NewProduct = () => {
         value: "",
         isValid: false,
       },
+      imageUrl: {
+        value: "",
+        isValid: false,
+      },
       description: {
         value: "",
         isValid: false,
@@ -39,6 +43,7 @@ const NewProduct = () => {
         "POST",
         JSON.stringify({
           name: formState.inputs.name.value,
+          imageUrl: formState.inputs.imageUrl.value,
           description: formState.inputs.description.value,
         }),
         {
@@ -63,6 +68,15 @@ const NewProduct = () => {
           onInput={inputHandler}
         />
         <Input
+          id="imageUrl"
+          element="input"
+          type="text"
+          label="IMAGE"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid imageUrl"
+          onInput={inputHandler}
+        />
+        <Input
           id="description"
           element="textarea"
           label="Description"
@@ -70,7 +84,11 @@ const NewProduct = () => {
           errorText="Please enter a valid description(at least 6 characters)."
           onInput={inputHandler}
         />
-        <Button type="submit" disabled={!formState.isValid} onClick={productSubmitHandler}>
+        <Button
+          type="submit"
+          disabled={!formState.isValid}
+          onClick={productSubmitHandler}
+        >
           ADD PRODUCT
         </Button>
       </form>

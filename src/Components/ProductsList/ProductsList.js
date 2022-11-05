@@ -50,7 +50,7 @@ const ProductsList = () => {
         {loadedProducts && loadedProducts.map((product) => (
           <SingleProduct key={product.id}
           id={product.id}
-          image={product.imageUrl}
+          imageUrl={product.imageUrl}
           name={product.name}
           description={product.description}
           onDeleteProduct={productDeletedHandler}
