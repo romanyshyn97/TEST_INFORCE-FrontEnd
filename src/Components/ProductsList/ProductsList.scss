@@ -1,0 +1,22 @@
+.product-list{
+
+    &_single-item{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        span{
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 50px;
+            img{
+                width: 28px;
+                height: 28px;
+            }
+        }
+    }
+}
