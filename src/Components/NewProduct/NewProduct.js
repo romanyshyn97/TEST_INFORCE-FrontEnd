@@ -16,7 +16,7 @@ import "./NewProduct.scss";
 
 const NewProduct = () => {
   const { isLoading, error, clearError, sendRequest } = useHttpClient();
-  
+
   const [formState, inputHandler] = useForm(
     {
       name: {
@@ -26,11 +26,10 @@ const NewProduct = () => {
       description: {
         value: "",
         isValid: false,
-      }
+      },
     },
     false
   );
-
 
   const productSubmitHandler = async (event) => {
     event.preventDefault();
@@ -38,13 +37,13 @@ const NewProduct = () => {
       await sendRequest(
         "http://localhost:5000/products",
         "POST",
-        {
-          "Content-Type": "application/json",
-        },
         JSON.stringify({
           name: formState.inputs.name.value,
-          description: formState.inputs.description.value
-        })
+          description: formState.inputs.description.value,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
       );
     } catch (err) {}
   };
@@ -68,14 +67,13 @@ const NewProduct = () => {
           element="textarea"
           label="Description"
           validators={[VALIDATOR_MINLENGTH(6)]}
-          errorText="Please enter a valid desription(at least 6 characters)."
+          errorText="Please enter a valid description(at least 6 characters)."
           onInput={inputHandler}
         />
-        <Button type="submit" disabled={!formState.isValid}>
-          ADD PLACE
+        <Button type="submit" disabled={!formState.isValid} onClick={productSubmitHandler}>
+          ADD PRODUCT
         </Button>
       </form>
-      
     </>
   );
 };

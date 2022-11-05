@@ -1,5 +1,7 @@
 .product-list{
-
+    width: 1140px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     &_single-item{
         position: relative;
         width: 300px;
