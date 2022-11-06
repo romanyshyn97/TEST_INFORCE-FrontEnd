@@ -8,11 +8,19 @@ export const productsFetchingError = createAction(actionTypes.PRODUCTS_FETCHING_
 export const productCreated = createAction(actionTypes.ADD_PRODUCT); 
 export const productDeleted = createAction(actionTypes.REMOVE_PRODUCT); 
 export const productUPDATE = createAction(actionTypes.UPDATE_PRODUCT); 
+export const currentProduct = createAction(actionTypes.LOAD_CURRENT_PRODUCT);
 
 export const fetchProducts = (request) => (dispatch) => {
     dispatch(productsFetching());
     request("http://localhost:5000/products")
         .then(data => dispatch(productsFetched(data)))
+        .catch(() => dispatch(productsFetchingError()))
+}
+
+export const fetchCurrentItem = (request, id) => (dispatch) => {
+    dispatch(productsFetching());
+    request(`http://localhost:5000/products/${id}`)
+        .then(data => dispatch(currentProduct(data)))
         .catch(() => dispatch(productsFetchingError()))
 }
 

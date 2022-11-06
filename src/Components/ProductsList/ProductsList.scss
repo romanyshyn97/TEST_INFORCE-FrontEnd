@@ -4,18 +4,42 @@
     grid-template-columns: repeat(3,1fr);
     grid-gap: 10px;
     &_single-item{
+        text-align: center;
         position: relative;
         width: 300px;
         height: 300px;
-        img{
-            width: 100px;
-            height: 100px;
+        padding: 5px;
+        transition: all 0.3s;
+        &:hover{
+            box-shadow: 0px 0px 35px #b81e33;
+            cursor: pointer;
+            transition: all 0.3s;
+            .delete{
+                display: block;
+            }
+            
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            
+        }
+        &_image{
+            img{ width: 100px;
+                height: 100px;}
+           
+        }
+        &_info{
+            width: 100%;
+        }
+        .delete{
+            display: none;
         }
         span{
             cursor: pointer;
             position: absolute;
             top: 0;
-            right: 50px;
+            right: 0;
             img{
                 width: 28px;
                 height: 28px;

@@ -1,6 +1,5 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-
-import shopReducer from "./reducer";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer";
 
 const stringMiddleware = (store) => (next) => (action) => {
     if(typeof action === 'string'){
@@ -12,8 +11,8 @@ const stringMiddleware = (store) => (next) => (action) => {
 }
 
 const store = configureStore({
-    reducer: shopReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware),
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stringMiddleware),
     devTools: process.env.NODE_ENV !== 'production'
 })
 
