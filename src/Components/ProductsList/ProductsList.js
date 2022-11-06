@@ -81,13 +81,13 @@ const ProductsList = () => {
     (id) => {
       sendRequest(`http://localhost:5000/products/${id}`, "DELETE")
         .then(dispatch(productDeleted(id)))
-        .catch(dispatch(fetchProducts(sendRequest)))
+        .then(dispatch(fetchProducts(sendRequest)))
         .catch((err) => console.log(err));
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
 
-    []
+    [sendRequest]
   );
 
   const showAddModal = () => {
@@ -105,6 +105,7 @@ const ProductsList = () => {
           <Spinner />
         </div>
       )}
+      
       <div className="center">
         <Button onClick={showAddModal}>ADD PRODUCT</Button>
         <Modal
@@ -147,7 +148,7 @@ const ProductsList = () => {
           />
         </Modal>
       </div>
-      <div className="product-list grid">
+      {!loading && loadedProducts && <div className="product-list grid">
         {!loading &&
           products &&
           products.map((product) => (
@@ -161,7 +162,7 @@ const ProductsList = () => {
               
             />
           ))}
-      </div>
+      </div>}
     </>
   );
 };

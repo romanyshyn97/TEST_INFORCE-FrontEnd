@@ -55,7 +55,7 @@ const SingleProduct = (props) => {
             <h2>{props.name}</h2>
             <p>count: 1</p>
             <h3>weight: 100g</h3>
-            <h3>{props.description}</h3>
+            <h3>Description: {props.description}</h3>
           </div>
         </Link>
         <span className="delete" onClick={showDeleteModalHandler}>
