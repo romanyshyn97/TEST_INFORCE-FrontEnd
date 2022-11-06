@@ -57,7 +57,7 @@ const ProductsList = () => {
     false
   );
 
-  const productSubmitHandler = useCallback((event) => {
+  const productSubmitHandler = (event) => {
     event.preventDefault();
     sendRequest(
       "http://localhost:5000/products",
@@ -71,24 +71,21 @@ const ProductsList = () => {
         "Content-Type": "application/json",
       }
     )
-      .then(dispatch(productCreated()))
-      .catch(dispatch(fetchProducts(sendRequest)))
+      .then(() => {
+        dispatch(productCreated());
+        dispatch(fetchProducts(sendRequest));
+      })
       .catch((err) => console.log(err));
-   
-  });
+  };
 
-  const onDelete = useCallback(
-    (id) => {
-      sendRequest(`http://localhost:5000/products/${id}`, "DELETE")
-        .then(dispatch(productDeleted(id)))
-        .then(dispatch(fetchProducts(sendRequest)))
-        .catch((err) => console.log(err));
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-
-    [sendRequest]
-  );
+  const onDelete = (id) => {
+    sendRequest(`http://localhost:5000/products/${id}`, "DELETE")
+      .then(() => {
+        dispatch(productDeleted(id));
+        dispatch(fetchProducts(sendRequest));
+      })
+      .catch((err) => console.log(err));
+  };
 
   const showAddModal = () => {
     setShow(true);
@@ -98,6 +95,8 @@ const ProductsList = () => {
     setShow(false);
   };
 
+  
+
   return (
     <>
       {loading && (
@@ -105,7 +104,7 @@ const ProductsList = () => {
           <Spinner />
         </div>
       )}
-      
+
       <div className="center">
         <Button onClick={showAddModal}>ADD PRODUCT</Button>
         <Modal
@@ -148,21 +147,23 @@ const ProductsList = () => {
           />
         </Modal>
       </div>
-      {!loading && loadedProducts && <div className="product-list grid">
-        {!loading &&
-          products &&
-          products.map((product) => (
-            <SingleProduct
-              key={product.id}
-              id={product.id}
-              imageUrl={product.imageUrl}
-              name={product.name}
-              description={product.description}
-              onDeleteProduct={()=>onDelete(product.id)}
-              
-            />
-          ))}
-      </div>}
+      {(!products || products.length === 0) && <h1 className="center">THERE IS NO ANY PRODUCT, <br/>please add some</h1>}
+      {!loading && loadedProducts && (
+        <div className="product-list grid">
+          {!loading &&
+            products &&
+            products.map((product) => (
+              <SingleProduct
+                key={product.id}
+                id={product.id}
+                imageUrl={product.imageUrl}
+                name={product.name}
+                description={product.description}
+                onDeleteProduct={() => onDelete(product.id)}
+              />
+            ))}
+        </div>
+      )}
     </>
   );
 };
